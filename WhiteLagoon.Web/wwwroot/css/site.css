@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+a.btn.btn-secondary.w-100 {
+    background-color: red ;
+}

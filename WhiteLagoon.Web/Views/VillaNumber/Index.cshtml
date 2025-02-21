@@ -1,0 +1,64 @@
+﻿@model IEnumerable<VillaNumber>
+
+<div class="w-100 card border-0 p-5">
+	<div class="card-header bg-success bg-gradient m-lg-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white py-2">Villa Number List</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card-body border p-4">
+	<div class="row pb-3">
+		@* /* Below is creating a button called Create New Villa *\ *@
+		<div class="col-6 offset-6 text-end">
+			@* Below in asp action I added Create which you will see is in Villa Controller. The function to create own villa for button *@
+			<a asp-controller="VillaNumber" asp-action="Create" class="btn btn-secondary">
+				@* Below code before Create New Villa is link copies from Bootstrap - See on _Layout for link intergrating bootstrap *@
+				<i class="bi bi-plus-circle"></i> Create New Villa Number
+			</a>
+		</div>
+	</div>
+
+	@* Below adds table with headers. also displays data as obj *@
+	<table class="table table-bordered table striped">
+		<thead>
+			<tr>
+
+				<th>Villa Name</th>
+				<th>Villa Number</th>
+				<th>Special Details</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var obj in Model) //even though model at top of page is lowercase - whenever referring to it use capital M and use @Foreach when c# code
+			{
+				<tr>
+
+					<td>@obj.Villa.Name</td>
+					<td>@obj.Villa_Number</td>
+					<td>@obj.SpecialDetails</td>
+					
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-controller="VillaNumber" asp-action="Update" asp-route-villaNumberId="@obj.Villa_Number"
+							   class="btn btn-success mx-2">
+								<i class="bi bi-pencil-square"></i> Edit
+							</a>
+							<a asp-controller="VillaNumber" asp-action="Delete" asp-route-villaNumberId="@obj.Villa_Number"
+							   class="btn btn-danger mx-2">
+								<i class="bi bi-trash-fill"></i> Delete
+							</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+
+
+	</table>
+
+</div>
