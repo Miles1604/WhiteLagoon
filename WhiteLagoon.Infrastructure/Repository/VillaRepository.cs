@@ -15,11 +15,12 @@ using static System.Net.Mime.MediaTypeNames;
 namespace WhiteLagoon.Infrastructure.Repository
 	
 {
-	public class VillaRepository : IVillaRepository
+	public class VillaRepository : Repository<Villa>, IVillaRepository // this is saying villa repository will get all methods from generic repository
+																	   // and is implementing the IVillaRepository
 
 	{
 		private readonly ApplicationDbContext _db;
-		public VillaRepository(ApplicationDbContext db)
+		public VillaRepository(ApplicationDbContext db) : base(db)
 		{
 			_db = db;
 		}
@@ -28,48 +29,7 @@ namespace WhiteLagoon.Infrastructure.Repository
 			_db.Add(entity);
 		}
 
-		public Villa Get(Expression<Func<Villa, bool>>? filter, string? includeProperties = null)
-		{
-			IQueryable<Villa> query = _db.Set<Villa>();
-			if (filter != null)
-			{
-				query = query.Where(filter);
-			}
-			if (!string.IsNullOrEmpty(includeProperties))
-			{
-				//Villa, VillaNumber -- case sensitive
-				foreach (var includeProp in includeProperties
-					.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-				{
-					query = query.Include(includeProp);
-				}
-			}
-			return query.FirstOrDefault();
-		}
-
-		public IEnumerable<Villa> GetAll(Expression<Func<Villa, bool>>? filter = null, string? includeProperties = null)
-		{
-			IQueryable<Villa> query =_db.Set<Villa>();
-			if(filter != null)
-			{
-				query = query.Where(filter);
-			}
-			if (!string.IsNullOrEmpty(includeProperties))
-			{
-				//Villa, VillaNumber -- case sensitive
-				foreach(var includeProp in includeProperties
-					.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
-				{
-					query = query.Include(includeProp);
-				}
-			}
-			return query.ToList();
-		}
-
-		public void Remove(Villa entity)
-		{
-			_db.Remove(entity);
-		}
+		
 
 		public void Save()
 		{
