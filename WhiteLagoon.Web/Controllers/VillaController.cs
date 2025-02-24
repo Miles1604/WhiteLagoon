@@ -10,6 +10,7 @@ namespace WhiteLagoon.Web.Controllers
     public class VillaController : Controller
     {
         private readonly IVillaRepository _villaRepo;
+
         public VillaController(IVillaRepository villaRepo)
         {
             _villaRepo = villaRepo;
