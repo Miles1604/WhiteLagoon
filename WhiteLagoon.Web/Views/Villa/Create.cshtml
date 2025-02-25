@@ -11,7 +11,7 @@
 </div>
 
 <div class="card-body border p-4">
-<form method="post" class="row" >
+<form method="post" class="row" enctype="multipart/form-data" > @*enctype is needed for IFormField to work! needs to be in form method*@
 	<div class="p-3">
 		@*need to create the below for custom model validation to display. This is for the villa name and description being the same validation error example*@
 		<div asp-validation-summary="ModelOnly"></div>
@@ -47,7 +47,8 @@
 			</div>
 			<div class="form-floating py-1 col-12">
 				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.ImageUrl" class="form-control border shadow" />
+				<input asp-for="@Model.ImageUrl" hidden class="form-control border shadow" />
+				<input asp-for="@Model.Image" class="form-control border shadow" />
 				<label asp-for="ImageUrl" class="ms-2"></label>
 				<span asp-validation-for="ImageUrl" class="text-danger"></span>
 			</div>
