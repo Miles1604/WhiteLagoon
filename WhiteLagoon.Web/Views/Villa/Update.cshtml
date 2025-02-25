@@ -17,67 +17,76 @@
 			id will also be submitted.
 			BEST PRACTICE -- to keep hidden fields straight under form tag so easier to find all.
 		*@
-		<div class="p-3">
-			@*need to create the below for custom model validation to display. This is for the villa name and description being the same validation error example*@
-			<div asp-validation-summary="ModelOnly"></div>
-			<div class="form-floating py-1 col-12">
-				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.Name" class="form-control border shadow" />
-				<label asp-for="Name" class="ms-2"></label>
-				<span asp-validation-for="Name" class="text-danger"></span>
-			</div>
-			<div class="form-floating py-1 col-12">
-				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.Description" class="form-control border shadow" />
-				<label asp-for="Description" class="ms-2"></label>
-				<span asp-validation-for="Description" class="text-danger"></span>
-				@* Span Asp Validation is the error message to show up if the field entered is blank or wrong data type i.e int or string*@
-			</div>
-			<div class="form-floating py-1 col-12">
-				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.Price" class="form-control border shadow" />
-				<label asp-for="Price" class="ms-2"></label>
-				<span asp-validation-for="Price" class="text-danger"></span>
-			</div>
-			<div class="form-floating py-1 col-12">
-				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.Sqft" class="form-control border shadow" />
-				<label asp-for="Sqft" class="ms-2"></label>
-				<span asp-validation-for="Sqft" class="text-danger"></span>
-			</div>
-			<div class="form-floating py-1 col-12">
-				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.Occupancy" class="form-control border shadow" />
-				<label asp-for="Occupancy" class="ms-2"></label>
-				<span asp-validation-for="Occupancy" class="text-danger"></span>
-			</div>
-			<div class="form-floating py-1 col-12">
-				@* //asp-for tag knows model entity so knows where to put data. *@
-				<input asp-for="@Model.ImageUrl" class="form-control border shadow" />
-				<label asp-for="ImageUrl" class="ms-2"></label>
-				<span asp-validation-for="ImageUrl" class="text-danger"></span>
-			</div>
-
-
-			<div class="row pr-2">
-				@* //below is the vode for the create buton. button type submit and success makes it green *@
-				<div class="col-6 col-md-3">
-					<button type="submit" class="btn btn-success w-100">
-						<i class="bi bi-check-circle"></i> Update
-					</button>
+		<div class="col-10">
+			<div class="p-3">
+				@*need to create the below for custom model validation to display. This is for the villa name and description being the same validation error example*@
+				<div asp-validation-summary="ModelOnly"></div>
+				<div class="form-floating py-1 col-12">
+					@* //asp-for tag knows model entity so knows where to put data. *@
+					<input asp-for="@Model.Name" class="form-control border shadow" />
+					<label asp-for="Name" class="ms-2"></label>
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+				<div class="form-floating py-1 col-12">
+					@* //asp-for tag knows model entity so knows where to put data. *@
+					<input asp-for="@Model.Description" class="form-control border shadow" />
+					<label asp-for="Description" class="ms-2"></label>
+					<span asp-validation-for="Description" class="text-danger"></span>
+					@* Span Asp Validation is the error message to show up if the field entered is blank or wrong data type i.e int or string*@
+				</div>
+				<div class="form-floating py-1 col-12">
+					@* //asp-for tag knows model entity so knows where to put data. *@
+					<input asp-for="@Model.Price" class="form-control border shadow" />
+					<label asp-for="Price" class="ms-2"></label>
+					<span asp-validation-for="Price" class="text-danger"></span>
+				</div>
+				<div class="form-floating py-1 col-12">
+					@* //asp-for tag knows model entity so knows where to put data. *@
+					<input asp-for="@Model.Sqft" class="form-control border shadow" />
+					<label asp-for="Sqft" class="ms-2"></label>
+					<span asp-validation-for="Sqft" class="text-danger"></span>
+				</div>
+				<div class="form-floating py-1 col-12">
+					@* //asp-for tag knows model entity so knows where to put data. *@
+					<input asp-for="@Model.Occupancy" class="form-control border shadow" />
+					<label asp-for="Occupancy" class="ms-2"></label>
+					<span asp-validation-for="Occupancy" class="text-danger"></span>
+				</div>
+				<div class="form-floating py-1 col-12">
+					@* //asp-for tag knows model entity so knows where to put data. *@
+					<input asp-for="@Model.Image" class="form-control border shadow" /> @*this line shows the upload image button on update view*@
+					<input asp-for="@Model.ImageUrl" hidden class="form-control border shadow" />
+					<label asp-for="ImageUrl" class="ms-2"></label>
+					<span asp-validation-for="ImageUrl" class="text-danger"></span>
 				</div>
 
-				@* //Below is cancel button which redirects you to villa home page also known as index *@
-				<div class="col-6 col-md-3">
-					<a asp-controller="Villa" asp-action="Index" class="btn btn-secondary w-100">
-						<i class="bi bi-x-circle"></i> Cancel
-					</a>
-				</div>
 
+				<div class="row pr-2">
+					@* //below is the vode for the create buton. button type submit and success makes it green *@
+					<div class="col-6 col-md-3">
+						<button type="submit" class="btn btn-success w-100">
+							<i class="bi bi-check-circle"></i> Update
+						</button>
+					</div>
+
+					@* //Below is cancel button which redirects you to villa home page also known as index *@
+					<div class="col-6 col-md-3">
+						<a asp-controller="Villa" asp-action="Index" class="btn btn-secondary w-100">
+							<i class="bi bi-x-circle"></i> Cancel
+						</a>
+					</div>
+
+
+				</div>
 
 			</div>
 
 		</div>
+		<div class="col-2"> @*styling for the villa image which is located to the right of the villa info in update view*@
+			<img src="@Model.ImageUrl" width="100%" 
+			style="border-radius:5px; border:solid #bbb9b9" />
+		</div>
+		
 
 
 
