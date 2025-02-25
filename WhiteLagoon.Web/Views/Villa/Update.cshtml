@@ -11,7 +11,7 @@
 </div>
 
 <div class="card-body border p-4">
-	<form method="post" class="row">
+	<form method="post" class="row" enctype="multipart/form-data">
 		<input asp-for="Id" hidden /> @* This code to the left needs to be here so it will update villas. 
 			Otherwise ID will be 0 and our http post method will try and create new villa.   It is marked as hidden so it won't be visible but when form is submitted the 
 			id will also be submitted.
