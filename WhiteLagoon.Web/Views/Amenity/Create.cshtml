@@ -1,0 +1,76 @@
+﻿@model AmenityVM //Added to _ViewImports so it's accessible
+@* The above is just @model Villa as we put the using domain entities as a global statement within _ViewImports.cshtml to save us keep typing on new views.*@
+<div class="w-100 card border-0 p-5">
+	<div class="card-header bg-success bg-gradient m-lg-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white py-2">Create Villa Amenity</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card-body border p-4">
+	<form method="post" class="row">
+		<div class="p-3">
+			@*need to create the below for custom model validation to display. This is for the villa name and description being the same validation error example*@
+			<div asp-validation-summary="ModelOnly"></div>
+			<div class="form-floating py-1 col-12">
+				@* //asp-for tag knows model entity so knows where to put data. *@
+				@*<select asp-for="@Model.VillaId" asp-items="@ViewData["VillaList"] as IEnumerable<SelectListItem>" --- This is a select list option*@
+				<select asp-for="@Model.Amenity.VillaId" asp-items="@Model.VillaList" @*instead of input this is select so it's a dropdown list*@
+						class="form-select border shadow">
+					<option disabled selected>--Select Villa--</option>
+				</select>
+				<label asp-for="Amenity.VillaId" class="ms-2"></label>
+				<span asp-validation-for="Amenity.VillaId" class="text-danger"></span>
+			</div>
+			<div class="form-floating py-1 col-12">
+				@* //asp-for tag knows model entity so knows where to put data. *@
+				<input asp-for="Amenity.Name" class="form-control border shadow" />
+				<label asp-for="Amenity.Name" class="ms-2"></label>
+				<span asp-validation-for="Amenity.Name" class="text-danger"></span>
+				@* Span Asp Validation is the error message to show up if the field entered is blank or wrong data type i.e int or string*@
+			</div>
+			<div class="form-floating py-1 col-12">
+				@* //asp-for tag knows model entity so knows where to put data. *@
+				<input asp-for="Amenity.Description" class="form-control border shadow" />
+				<label asp-for="Amenity.Description" class="ms-2"></label>
+				<span asp-validation-for="Amenity.Description" class="text-danger"></span>
+				@* Span Asp Validation is the error message to show up if the field entered is blank or wrong data type i.e int or string*@
+			</div>
+		
+
+
+
+			<div class="row pr-2">
+				@* //below is the vode for the create buton. button type submit and success makes it green *@
+				<div class="col-6 col-md-3">
+					<button type="submit" class="btn btn-success w-100">
+						<i class="bi bi-check-circle"></i> Create
+					</button>
+				</div>
+
+				@* //Below is cancel button which redirects you to villa home page also known as index *@
+				<div class="col-6 col-md-3">
+					<a asp-controller="Amenity" asp-action="Index" class="btn btn-secondary w-100">
+						<i class="bi bi-x-circle"></i> Cancel
+					</a>
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+
+
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
