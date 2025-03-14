@@ -60,21 +60,13 @@ namespace WhiteLagoon.Web.Controllers
         [HttpPost]
         public IActionResult Create(AmenityVM obj)
         {
-            bool roomNumberExists = _unitOfWork.Amenity.Any(u => u.Villa_Number == obj.Amenity.Villa_Number);
-            //True or false if any records in db with villa number being entered
-
-			if (ModelState.IsValid && !roomNumberExists)
+			if (ModelState.IsValid)
             {
                 _unitOfWork.Amenity.Add(obj.Amenity);
                 _unitOfWork.Save();
-                TempData["success"] = "The Villa Number has been created successfully";
+                TempData["success"] = "Amenity has been created successfully";
                 return RedirectToAction(nameof(Index)); //name of doesn't work if diff controller
             }
-            if(roomNumberExists)
-            {
-                TempData["error"] = "The villa number already exists.";
-            }
-
             obj.VillaList = _unitOfWork.Villa.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
@@ -92,7 +84,7 @@ namespace WhiteLagoon.Web.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()   //This code is creating a dropdownlist of villa ID and Name
                 }),
-                Amenity = _unitOfWork.Amenity.GetAll().FirstOrDefault(u=>u.Villa_Number== amenityId)
+                Amenity = _unitOfWork.Amenity.GetAll().FirstOrDefault(u=>u.Id== amenityId)
 
 			};
 
@@ -112,7 +104,7 @@ namespace WhiteLagoon.Web.Controllers
             {
                 _unitOfWork.Amenity.Update(amenityVM.Amenity);
 				_unitOfWork.Save();
-				TempData["success"] = "The Villa Number has been updated successfully";
+				TempData["success"] = "The Amenity has been updated successfully";
                 return RedirectToAction(nameof(Index)); //clean code
             }
 
@@ -134,7 +126,7 @@ namespace WhiteLagoon.Web.Controllers
 					Text = u.Name,
 					Value = u.Id.ToString()   //This code is creating a dropdownlist of villa ID and Name
 				}),
-				Amenity = _unitOfWork.Amenity.Get(u => u.Villa_Number == amenityId)
+				Amenity = _unitOfWork.Amenity.Get(u => u.Id == amenityId)
 
 			};
 
@@ -149,15 +141,16 @@ namespace WhiteLagoon.Web.Controllers
         [HttpPost]
         public IActionResult Delete(AmenityVM amenityVM)
         {
-            Amenity? objFromDb = _unitOfWork.Amenity.Get(u => u.Villa_Number == amenityVM.Amenity.Villa_Number);
+            Amenity? objFromDb = _unitOfWork.Amenity
+                .Get(u => u.Id == amenityVM.Amenity.Id);
             if (objFromDb is not null)
             {
                 _unitOfWork.Amenity.Remove(objFromDb);
                 _unitOfWork.Save();
-                TempData["success"] = "The villa number has been deleted successfully";
+                TempData["success"] = "The Amenity has been deleted successfully";
                 return RedirectToAction(nameof(Index));
             }
-            TempData["error"] = "The villa number could not be deleted";
+            TempData["error"] = "The Amenity could not be deleted";
             return View();
         }
     }
