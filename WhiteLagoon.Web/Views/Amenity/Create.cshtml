@@ -17,9 +17,7 @@
 			<div asp-validation-summary="ModelOnly"></div>
 			<div class="form-floating py-1 col-12">
 				@* //asp-for tag knows model entity so knows where to put data. *@
-				@*<select asp-for="@Model.VillaId" asp-items="@ViewData["VillaList"] as IEnumerable<SelectListItem>" --- This is a select list option*@
-				<select asp-for="@Model.Amenity.VillaId" asp-items="@Model.VillaList" @*instead of input this is select so it's a dropdown list*@
-						class="form-select border shadow">
+				<select asp-for="@Model.Amenity.VillaId" asp-items="@Model.VillaList" class="form-select border shadow">
 					<option disabled selected>--Select Villa--</option>
 				</select>
 				<label asp-for="Amenity.VillaId" class="ms-2"></label>
