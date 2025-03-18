@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http; //needed to use IFormFile
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,6 +38,9 @@ namespace WhiteLagoon.Domain.Entities
         public string? ImageUrl { get; set; }
         public DateTime? Created_Date { get; set; }
         public DateTime? Updated_Date { get;set; }
+        [ValidateNever] //add this validate never else it will try and validate the below in model state validation.
+        public IEnumerable<Amenity> VillaAmenity { get; set; }
+        //to populate villa amenity go to home controller and put in the get all brackets
 
     }
 }
