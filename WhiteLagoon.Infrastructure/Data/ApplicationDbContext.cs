@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,22 @@ using WhiteLagoon.Domain.Entities;
 
 namespace WhiteLagoon.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         //The below is mirroring this AppDbContext to dbcontext
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { 
-        }
-        //The Villa below that isn't between the crocodiles is what ends up being the table name in DB
+
+        } 
+        //in brackets is the class name, outside brackets is what the table will be called in DB - except applicationusers
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); //required for identity context
 
             modelBuilder.Entity<Villa>().HasData(
                   new Villa
