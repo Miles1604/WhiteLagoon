@@ -28,7 +28,39 @@ namespace WhiteLagoon.Web.Controllers
             return View(homeVM);
         }
 
-            public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Index(HomeVM homeVM)
+        {
+            homeVM.VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
+
+            return View(homeVM);
+        }
+            
+    
+
+
+
+    public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
+    {
+        var villaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity").ToList();
+        foreach (var villa in villaList)
+        {
+            if (villa.Id % 2 == 0)
+            {
+                villa.IsAvailable = false;
+            }
+        }
+        HomeVM homeVM = new()
+        {
+            CheckInDate = checkInDate,
+            VillaList = villaList,
+            Nights = nights
+        };
+
+        return PartialView("_VillaList",homeVM); //this only loads the one section and not refreshes page
+            //in this instance it's refreshing the villas section after searching availability.
+    }
+		public IActionResult Privacy()
             {
                 return View();
             }

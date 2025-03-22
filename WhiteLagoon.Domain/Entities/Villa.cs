@@ -42,5 +42,8 @@ namespace WhiteLagoon.Domain.Entities
         public IEnumerable<Amenity> VillaAmenity { get; set; }
         //to populate villa amenity go to home controller and put in the get all brackets
 
+        [NotMapped] //doesn't create in db
+        public bool IsAvailable { get; set; } = true;
+
     }
 }
