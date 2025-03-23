@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/spinner.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="/css/spinner.css" />
 
 </head>
 <body>
@@ -57,6 +58,7 @@
     </header>
     <div class="">
         <main role="main">
+            <div class="loading spinner" style="display:none;"></div>
            <partial name="_Notification"/> 
            @*created a partial view. essentially just created new view called _Notification and put code there to stop duplicating code. 
            then told layout its a partial from above.stops _layout code getting busy and complicated*@
