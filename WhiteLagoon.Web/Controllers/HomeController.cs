@@ -29,18 +29,7 @@ namespace WhiteLagoon.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(HomeVM homeVM)
-        {
-            homeVM.VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
-
-            return View(homeVM);
-        }
-            
-    
-
-
-
-    public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
+        public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
     {
             Thread.Sleep(500); // waits 2000ms so we can see spinner
         var villaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity").ToList();
