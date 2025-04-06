@@ -12,7 +12,7 @@ namespace WhiteLagoon.Application.Common.Interfaces
 		IVillaNumberRepository VillaNumber { get; }
 		IBookingRepository Booking { get; }
 		IAmenityRepository Amenity { get; }
-		IApplicationUserRepository ApplicationUser { get; }
+		IApplicationUserRepository User { get; }
 		void Save();
 
 
