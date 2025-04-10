@@ -18,5 +18,7 @@ namespace WhiteLagoon.Application.Common.Utility
         public const string StatusCompleted = "Completed";
         public const string StatusCancelled = "Cancelled";
         public const string StatusRefunded = "Refunded";
+
+        public const string CurrencyFormat = "GBP";
     }
 }

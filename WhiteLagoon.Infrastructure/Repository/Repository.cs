@@ -53,22 +53,22 @@ namespace WhiteLagoon.Infrastructure.Repository
 
 		public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
 		{
-			IQueryable<T> query = dbSet;
-			if (filter != null)
-			{
-				query = query.Where(filter);
-			}
-			if (!string.IsNullOrEmpty(includeProperties))
-			{
-				//Villa, VillaNumber -- case sensitive
-				foreach (var includeProp in includeProperties
-					.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-				{
-					query = query.Include(includeProp);
-				}
-			}
-			return query.ToList();
-		}
+            IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                //Villa, VillaNumber -- case sensitive
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+            return query.ToList();
+        }
 
 		public void Remove(T entity)
 		{

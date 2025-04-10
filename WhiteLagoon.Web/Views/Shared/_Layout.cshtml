@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/css/spinner.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="/css/spinner.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css" />
 
 </head>
 <body>
@@ -48,6 +49,9 @@
                                 <li class="nav-item">
                                     <a class="dropdown-item" asp-controller="Amenity" asp-action="Index">Amenity</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-controller="Booking" asp-action="Index" asp-route-status="@SD.StatusApproved">Booking</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -79,9 +83,11 @@
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    @*<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"*@
     @*OLD - <script src="-live/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>*@
     @* <script src="~/js/jquery.unobtrusive-ajax.min.js"></script> *@
+    <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 </html>

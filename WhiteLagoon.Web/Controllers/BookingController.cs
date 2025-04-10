@@ -12,17 +12,24 @@ using WhiteLagoon.Infrastructure.Repository;
 
 namespace WhiteLagoon.Web.Controllers
 {
+    [Authorize]
     public class BookingController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        
+
         public BookingController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        [Authorize]//makes user login if not done so before being able to book. once logged in, directs them back
-        public IActionResult FinalizeBooking(int villaId, DateOnly checkInDate, int nights)
+        //[AllowAnonymous]
+        public IActionResult Index()
         {
-
+            return View();
+        }
+        //[Authorize]//makes user login if not done so before being able to book. once logged in, directs them back
+        public IActionResult FinalizeBooking(int villaId, DateTime checkInDate, int nights)
+        {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -73,7 +80,7 @@ namespace WhiteLagoon.Web.Controllers
                 PriceData = new SessionLineItemPriceDataOptions
                 {
                     UnitAmount = (long)(booking.TotalCost * 100),
-                    Currency = "gbp",
+                    Currency = SD.CurrencyFormat,
                     ProductData = new SessionLineItemPriceDataProductDataOptions
                     {
                         Name = villa.Name,
@@ -116,5 +123,35 @@ namespace WhiteLagoon.Web.Controllers
 
             return View(bookingId);
         }
-}
+
+
+        #region API Calls
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAll(string status) 
+        {
+            IEnumerable<Booking> objBookings;
+
+            if (User.IsInRole(SD.Role_Admin))
+            {
+                objBookings = _unitOfWork.Booking.GetAll(includeProperties: "User,Villa");
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                objBookings = _unitOfWork.Booking
+                    .GetAll(u => u.UserId == userId, includeProperties: "User, Villa");
+            }
+            if (!string.IsNullOrEmpty(status)) 
+            { 
+            objBookings = objBookings.Where(u => u.Status.ToLower().Equals(status.ToLower()));
+            }
+
+            return Json(new { data = objBookings });
+        }
+
+        #endregion
+    }
 }
